@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "repository": {
+    "url": "https://github.com/EmmanuelRdezG2/e-commerce-back-end.git",
+    "type": "git"
+  },
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "EmmanuelRdezG2",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongoose": "^6.2.7",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }
