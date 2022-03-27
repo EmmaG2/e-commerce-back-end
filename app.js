@@ -1,26 +1,26 @@
+// express
+
 const express = require('express')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
 
 require('dotenv/config')
 
 const app = express()
 const port = process.env.PORT
 const api = process.env.API_URL
+const productsRouter = require('./routes/products.route')
+const { dbConnection } = require('./database/dbConnection')
 
 app.use(express.json())
 app.use(morgan('tiny'))
 
-app.use(api, require('./routes/products'))
+// Routes
+app.use(api, productsRouter)
 
-mongoose.connect(process.env.DB_CONNECT)
-  .then(() => {
-    console.log('Db Connection is ready');
-  })
-  .catch((e) => {
-    console.log(e);
-  })
+// DB
+dbConnection()
 
+// initialize
 app.listen(port, () => {
-  console.log(`https://localhost:${port}`)
+  console.log(`Port: ${port}`)
 })
