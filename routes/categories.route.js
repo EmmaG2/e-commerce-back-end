@@ -3,6 +3,7 @@ const { Router } = require('express');
 
 const router = Router()
 
+// ! GET 
 router.get(`/categories`, async (req, res) => {
   Category.find()
     .then(cat => {
@@ -29,6 +30,7 @@ router.get(`/categories/:id`, async (req, res) => {
   res.status(200).send(category)
 })
 
+// * POST
 router.post(`/categories`, (req, res) => {
     const category = new Category({
       name: req.body.name,
@@ -40,6 +42,9 @@ router.post(`/categories`, (req, res) => {
     res.send(category)
   })
 
+// TODO: Hacer las peticiones PUT
+
+//? DELETE 
 router.delete(`/:id`, (req, res) => {
   Category.findByIdAndRemove(req.params.id)
     .then(cat =>{
