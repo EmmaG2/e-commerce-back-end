@@ -9,7 +9,7 @@ router.get(`/products`, async (req, res) => {
   
   const productList = await product.find()
 
-  if (!productList) res.status(500).json({"succes": false})
+  if (!productList) res.status(500).json({succes: false})
 
   res.send(productList)
 })
