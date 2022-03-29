@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "repository": {
-    "url": "https://github.com/EmmanuelRdezG2/e-commerce-back-end.git",
+    "url": "https://github.com/EmmanuelRdezG2/e-commerce-back-end",
     "type": "git"
   },
   "scripts": {
