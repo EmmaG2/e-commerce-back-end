@@ -20,7 +20,8 @@ app.options('*', cors())
 app.use(express.json())
 app.use(morgan('tiny'))
 
-app.use(api, [productsRouter, categoriesRouter])
+app.use(api, productsRouter)
+app.use(api, categoriesRouter)
 
 // DB
 dbConnection()
