@@ -1,5 +1,5 @@
-const { Category } = require('../models/category.schema');
-const { Router } = require('express');
+const { Category } = require('../models/category.schema')
+const { Router } = require('express')
 
 const router = Router()
 
@@ -87,4 +87,4 @@ router.delete(`/categories/:id`, (req, res) => {
     })
 })
 
-module.exports = router;
+module.exports = router

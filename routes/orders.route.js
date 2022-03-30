@@ -4,10 +4,10 @@ const { Router } = require('express')
 const router = Router()
 
 router.get(`/`, async (req, res) =>{
-  const orderList = await Order.find();
+  const orderList = await Order.find()
 
   if(!orderList) res.status(500).json({success: false})
-  res.send(orderList);
+  res.send(orderList)
 })
 
-module.exports = router;
+module.exports = router

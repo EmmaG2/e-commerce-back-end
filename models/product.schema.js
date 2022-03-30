@@ -36,7 +36,7 @@ const productSchema = mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 0
+    default: 0.
   },
   numReviews: {
     type: Number,
@@ -57,5 +57,5 @@ const productSchema = mongoose.Schema({
   }
 })
 
-exports.product = mongoose.model('Product', productSchema);
+exports.product = mongoose.model('Product', productSchema)
 
