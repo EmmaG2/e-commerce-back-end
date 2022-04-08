@@ -79,12 +79,6 @@ router.delete(`/categories/:id`, (req, res) => {
         message: 'category has been deleted'
       })
     })
-    .catch(err => {
-      return res.status(400).json({
-        succes: false,
-        err
-      })
-    })
 })
 
 module.exports = router
