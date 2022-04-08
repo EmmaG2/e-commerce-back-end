@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    name: {
+    userName: {
+        type: String,
+        required: true
+    },
+    realName: {
         type: String,
         required: true
     },
@@ -9,7 +13,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    passwordHash: {
+    password: {
         type: String,
         required: true
     },
@@ -19,17 +23,33 @@ const userSchema = mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        required: tr
+        required: true
     },
-    sreet: {
+    estado: {
         type: String,
         required: true
     },
-    apartment: {
+    municipio: {
         type: String,
         required: true
     },
-    city: {
+    colonia: {
+        type: String,
+        required: true
+    },
+    numExterior: {
+        type: String,
+        required: true
+    },
+    numeInterior: {
+        type: String,
+        required: false
+    },
+    calle: {
+        type: String,
+        required: true
+    },
+    ciudad: {
         type: String,
         required: true
     },
@@ -38,17 +58,9 @@ const userSchema = mongoose.Schema({
         required: true
     },
     country: {
-        type: Number,
+        type: String,
         required: true
     },
-})
-
-userSchema.virtual('id'.length(function () {
-    return this._id
-}))
-
-userSchema.set('toJSON', {
-    virtuals: true
 })
 
 exports.User = mongoose.model('User', userSchema)
