@@ -1,0 +1,16 @@
+{   
+  "userName": "232323",
+  "realName": "Tontito Perez",
+  "email": "miguel3456@gmail.com",
+  "password": "123456",
+  "phone": "6182598787",
+  "isAdmin": true,
+  "estado": "Durango",
+  "municipio": "Durango",
+  "colonia": "Fracc. Las Bugambilias",
+  "numExterior": "139",
+  "calle":"calle flor de bugambilia",
+  "ciudad":"vitoria de durango",
+  "cp":34234,
+  "country":"Mexico"
+}
