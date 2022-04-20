@@ -9,7 +9,7 @@ router.get(`/categories`, async (req, res) => {
     .then(cat => {
       if (!cat) return res.status(404).json({
         succes: false,
-        mesege: 'categoria no encontrada'
+        messege: 'categoria no encontrada'
       })
 
       return res.status(200).send(cat)
@@ -50,7 +50,10 @@ router.put(`/categories/:id`, async (req, res) => {
     {
       name: req.body.name,
       color: req.body.color,
-      icon: req.body.icon || category.icon
+      icon: req.body.icon || category.icon,
+      name: req.body.name,
+      color: req.body.color,
+      icon: req.body.icon
     },
     {
       new: true
