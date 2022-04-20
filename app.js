@@ -13,15 +13,23 @@ const api = process.env.API_URL
 // Routes 
 const productsRouter = require('./routes/products.route')
 const categoriesRouter = require('./routes/categories.route')
+const usersRouter = require('./routes/users.route')
+const authJwt = require('./middlewares/jwt.middleware')
+const handlingErrors = require('./middlewares/error.middleware')
 
 app.use(cors())
 app.options('*', cors())
 
+// middleware
 app.use(express.json())
 app.use(morgan('tiny'))
+app.use(authJwt())
+app.use(handlingErrors)
 
+// routes
 app.use(api, productsRouter)
 app.use(api, categoriesRouter)
+app.use(api, usersRouter)
 
 // DB
 dbConnection()
