@@ -3,7 +3,7 @@ const handlingErrors = ( err, req, res, next) => {
     const errorName = err.name
 
     const ERRORS_STATUS = {
-      UnauthorizedError: res.status(401).json({message: "the user is not authorized", err}),
+      UnauthorizedError: res.status(401).json({message: "No estás autorizado para ver esta página", err}),
       ValidationError: res.status(401).json({message: "A Validation error", err}),
       NoError: res.status(200).json({message: 'No errors'})
     }
