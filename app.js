@@ -1,6 +1,6 @@
 // express
 require('dotenv/config')
-const { dbConnection } = require('./database/dbConnection')
+const {dbConnection} = require('./database/dbConnection')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -13,6 +13,8 @@ const api = process.env.API_URL
 const productsRouter = require('./routes/products.route')
 const categoriesRouter = require('./routes/categories.route')
 const usersRouter = require('./routes/users.route')
+const ordersRouter = require('./routes/orders.route')
+
 const authJwt = require('./middlewares/jwt.middleware')
 const handlingErrors = require('./middlewares/error.middleware')
 app.use(cors())
@@ -28,6 +30,7 @@ app.use(handlingErrors)
 app.use(api, productsRouter)
 app.use(api, categoriesRouter)
 app.use(api, usersRouter)
+app.use(api, ordersRouter)
 
 // DB
 dbConnection()
