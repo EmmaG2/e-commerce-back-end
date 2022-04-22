@@ -1,10 +1,10 @@
-const handlingErrors = ( err, req, res, next) => {
+const handlingErrors = ( error, req, res, next) => {
   try {
-    const errorName = err.name
+    const errorName = error.name
 
     const ERRORS_STATUS = {
-      UnauthorizedError: res.status(401).json({message: "No estás autorizado para ver esta página", err}),
-      ValidationError: res.status(401).json({message: "A Validation error", err}),
+      UnauthorizedError: res.status(401).json({message: "No estás autorizado para hacer esto", error}),
+      ValidationError: res.status(401).json({message: "Error de validación", error}),
       NoError: res.status(200).json({message: 'No errors'})
     }
     const DEFAULT_ERROR = 'NoError'
