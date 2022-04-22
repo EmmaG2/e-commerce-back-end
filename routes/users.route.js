@@ -38,7 +38,10 @@ router.post(`/users/login`, async (req, res) => {
 
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
     const token = jwt.sign(
-      {userId: user.id},
+      {
+        userId: user.id,
+        isAdmin: user.isAdmin,
+      },
       secret
     )
     return res.status(200).send({user: user.email, token})
@@ -99,7 +102,18 @@ router.get(`/users/:id`, async (req, res) => {
   res.status(200).send(user)
 })
 
-module.exports = router
+router.get(`/users/get/count`, (req, res) => {
+
+  User.countDocuments()
+    .then(usersCount => {
+      if (!usersCount) return res.status(500).json({
+        succes: false,
+        message: 'No se encontraron usuarios'
+      })
+
+      return res.status(200).send({usersCount})
+    })
+})
 
 // TODO: PUT METHODS
 router.put(`/users/:id`, async (req, res) => {
@@ -142,3 +156,24 @@ router.put(`/users/:id`, async (req, res) => {
 
     res.send(user)
 })
+
+
+// TODO: DELETE routes
+
+router.delete(`/users/:id`, (req, res) => {
+
+  User.findByIdAndDelete(req.params.id)
+    .then(user => {
+      if (!user) return res.status(404).json({
+        succes: false,
+        message: 'user can\'t be deleted'
+      })
+
+      return res.status(200).json({
+        succes: true,
+        message: 'User has been deleted'
+      })
+    })
+})
+
+module.exports = router
