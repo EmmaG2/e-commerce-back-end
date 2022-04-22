@@ -7,13 +7,12 @@ const categorySchema = mongoose.Schema({
   },
   color: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    required: true
-  }
-
+    required: true,
+  },
 })
 
 exports.Category = mongoose.model('Category', categorySchema)
