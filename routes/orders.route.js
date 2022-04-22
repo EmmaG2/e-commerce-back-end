@@ -27,13 +27,19 @@ router.post(`/orders`, (req, res) => {
     orderItems: orderItemsIds,
     shippingAdress1: req.body.shippingAdress1,
     shippingAdress2: req.body.shippingAdress2,
+    estado: req.body.estado,
+    municipio: req.body.municipio,
+    colonia: req.body.colonia,
+    numExterior: req.body.numExterior,
+    numInterior: req.body.numInterior,
+    calle: req.body.calle,
     ciudad: req.body.ciudad,
     cp: req.body.cp,
     country: req.body.country,
-    phone: req.body.phone,
-    status: req.body.status,
     totalPrice: req.body.totalPrice,
     user: req.body.user,
+    phone: req.body.phone,
+    status: req.body.status,
   })
 
   order.save()
