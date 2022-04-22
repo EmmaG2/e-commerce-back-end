@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const { product } = require('../models/product.schema')
-const { Category } = require('../models/category.schema')
-const { Router } = require('express')
+const {product} = require('../models/product.schema')
+const {Category} = require('../models/category.schema')
+const {Router} = require('express')
 
 require('dotenv/config')
 
@@ -28,28 +28,29 @@ router.post(`${productsRote}`, async (req, res) => {
     numReviews: req.body.numReviews,
     isFeatured: req.body.isFeatured,
     dateCreated: req.body.dateCreated,
-    category: req.body.category
+    category: req.body.category,
   })
 
   await newProduct.save()
-  if (!newProduct) return res.status(404).json({
-    succes: false,
-    message: 'El producto no fue credo correctamente'
-  })
+  if (!newProduct)
+    return res.status(404).json({
+      succes: false,
+      message: 'El producto no fue credo correctamente',
+    })
 
   res.send(newProduct)
 })
 
 // ? GET
 router.get(`${productsRote}`, async (req, res) => {
-
   let filter = {}
 
   if (req.query.categories) {
     filter = {category: req.query.categories.split(',')}
   }
-  
-  const productList = await product.find(filter)
+
+  const productList = await product
+    .find(filter)
     // .select('-_id')
     .populate('category')
 
@@ -59,56 +60,59 @@ router.get(`${productsRote}`, async (req, res) => {
 })
 
 router.get(`${productsRote}/:id`, (req, res) => {
-
-  product.findById(req.params.id).populate('category')
-    .then(prod => {
-      if (!prod) return res.status(404).json({
-        succes: false,
-        messege: 'producto no encontrado'
-      })
+  product
+    .findById(req.params.id)
+    .populate('category')
+    .then((prod) => {
+      if (!prod)
+        return res.status(404).json({
+          succes: false,
+          messege: 'producto no encontrado',
+        })
 
       return res.status(200).send(prod)
     })
 })
 
 router.get(`${productsRote}/get/count`, (req, res) => {
-  product.countDocuments()
-    .then(productCount => {
-      if (!productCount) return res.status(500).json({
+  product.countDocuments().then((productCount) => {
+    if (!productCount)
+      return res.status(500).json({
         success: false,
-        message: 'No items'
+        message: 'No items',
       })
 
-      return res.status(200).send({productCount})
-    })
+    return res.status(200).send({productCount})
+  })
 })
 
 router.get(`${productsRote}/get/feature/:count`, (req, res) => {
   const count = req.params.count ? req.params.count : 0
-  
-  product.find({
-    isFeatured: true
-  }).limit(parseInt(count))
-    .then(featuredProd => {
-      if (!featuredProd) return res.status(500).json({
-        success: false,
-        message: 'No items'
-      })
+
+  product
+    .find({
+      isFeatured: true,
+    })
+    .limit(parseInt(count))
+    .then((featuredProd) => {
+      if (!featuredProd)
+        return res.status(500).json({
+          success: false,
+          message: 'No items',
+        })
 
       return res.status(200).send({featuredProd})
     })
 })
 
-
-
 // * PUT
 
 router.put(`${productsRote}/:id`, async (req, res) => {
-
   if (mongoose.isValidObjectId(req.params.id)) return res.status(500).send('invalid product id')
 
   const updateProduct = await product.findByIdAndUpdate(
-    req.params.id,{
+    req.params.id,
+    {
       name: req.body.name,
       description: req.body.description,
       richDescription: req.body.richDescription,
@@ -120,39 +124,42 @@ router.put(`${productsRote}/:id`, async (req, res) => {
       numReviews: req.body.numReviews,
       isFeatured: req.body.isFeatured,
       dateCreated: req.body.dateCreated,
-      category: req.body.category
-    }, { new: true })
+      category: req.body.category,
+    },
+    {new: true}
+  )
 
-    if (!updateProduct) return res.status(404).json({
+  if (!updateProduct)
+    return res.status(404).json({
       succes: false,
-      message: 'No se pudo actualizar la categoria'
+      message: 'No se pudo actualizar la categoria',
     })
 
-    res.send(updateProduct)
+  res.send(updateProduct)
 })
 
 //TODO: DELETE route
 router.delete(`${productsRote}/:id`, (req, res) => {
-  product.findByIdAndRemove(req.params.id)
-    .then(prod => {
-      if (!prod) return res.status(404).json({
-        success: false,
-        message: 'product can\'t be deleted'
-      })
-      
+  product
+    .findByIdAndRemove(req.params.id)
+    .then((prod) => {
+      if (!prod)
+        return res.status(404).json({
+          success: false,
+          message: "product can't be deleted",
+        })
+
       return res.status(200).json({
         succes: true,
-        message: 'product has been deleted'
+        message: 'product has been deleted',
       })
     })
-    .catch(err => {
+    .catch((err) => {
       return res.status(400).json({
         succes: false,
-        err
+        err,
       })
     })
 })
-
-
 
 module.exports = router
